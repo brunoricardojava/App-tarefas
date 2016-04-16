@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+
+    <script src="js/TasksModel.js"></script>
+
+    <!-- your app's js -->
+    <script src="js/app.js"></script>
+  </head>
+
+  <body ng-app="starter">
+
+    <ion-pane ng-controller ="mainController">
+
+      <ion-header-bar class="bar-energized">
+
+        <h1 class="title">Tarefas</h1>
+
+      </ion-header-bar>
+
+
+      <div class="row">
+
+        <ion-footer-bar class="bar-calm">
+
+          <div class="col">
+
+            <strong>Finalizada</strong>
+          
+          </div>
+
+          <div class="col">
+
+            <label class="toggle">
+
+              <input type="checkbox" ng-model="showMarked">
+              
+              <div class="track">
+                <div class="handle"></div>
+              </div>
+
+            </label>
+
+          </div>
+
+          <div class="col">
+
+            <strong>Remover</strong>
+          
+          </div>
+
+          <div class="col">
+
+            <label class="toggle">
+
+              <input type="checkbox" ng-model="remove">
+              
+              <div class="track">
+                <div class="handle"></div>
+              </div>
+
+            </label>
+
+          </div>
+
+        </ion-footer-bar>        
+
+      </div>
+
+
+      
+      <ion-content>
+
+        <button class="button button-block button-balanced" ng-click="onItemAdd(item)">Adicionar</button>
+
+        <ion-list show-delete="remove">
+          <ion-item ng-repeat="item in lista track by $index" ng-hide="onShowItem(item)">
+
+            <div class="row">
+            
+              <div class="col col-90">
+                {{item.nome}}
+                <ion-delete-button class="ion-minus-circled" ng-click="onItemRemove(item)"></ion-delete-button>
+                <ion-option-button class="button-positive" ng-click="onItemEdit(item)">Edit</ion-option-button>
+              </div>
+              
+              <div class="col">
+                <button class="button button-small button-positive button-outline" ng-click="onMarkTask(item)">
+                  <i class="icon ion-checkmark" ng-show="item.finalizada"></i>
+                </button></div>
+            
+            </div>
+
+          </ion-item>
+        </ion-list>
+
+      </ion-content>
+    
+    </ion-pane>
+  </body>
+</html>
